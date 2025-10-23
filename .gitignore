@@ -1,0 +1,38 @@
+# Dependências
+node_modules/
+package-lock.json
+yarn.lock
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.swo
+*~
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+*.min.js
+*.min.css
+
+# Testes
+coverage/
+.nyc_output/
+
+# Arquivos temporários
+tmp/
+temp/
+

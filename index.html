@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busca Profissionais - Encontre o Profissional Ideal</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <h1 class="logo">Busca<span>Profissionais</span></h1>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">Início</a></li>
+          <li><a href="#profissionais">Profissionais</a></li>
+          <li><a href="#categorias">Categorias</a></li>
+          <li><a href="#login">Entrar</a></li>
+          <li><a href="#cadastro">Cadastrar</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Seção Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Encontre o Profissional Ideal</h2>
+      <p>Conecte-se com profissionais qualificados de todas as áreas em sua cidade!</p>
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="buscaInput" 
+          placeholder="Digite o serviço, profissão ou especialidade..." 
+          aria-label="Buscar profissionais"
+        />
+        <button onclick="buscarProfissionais()" class="btn-buscar">
+          <i class="fa-solid fa-search"></i> Buscar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Categorias -->
+  <section id="categorias" class="categories">
+    <div class="container">
+      <h3>Categorias Populares</h3>
+      <div class="card-container">
+        <div class="category-card" onclick="buscarPorCategoria('Eletricista')">
+          <i class="fa-solid fa-bolt"></i>
+          <p>Eletricista</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Encanador')">
+          <i class="fa-solid fa-wrench"></i>
+          <p>Encanador</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Pedreiro')">
+          <i class="fa-solid fa-hammer"></i>
+          <p>Pedreiro</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Pintor')">
+          <i class="fa-solid fa-paint-roller"></i>
+          <p>Pintor</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Diarista')">
+          <i class="fa-solid fa-broom"></i>
+          <p>Diarista</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Carpinteiro')">
+          <i class="fa-solid fa-hammer-and-wrench"></i>
+          <p>Carpinteiro</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Jardineiro')">
+          <i class="fa-solid fa-leaf"></i>
+          <p>Jardineiro</p>
+        </div>
+        <div class="category-card" onclick="buscarPorCategoria('Mecânico')">
+          <i class="fa-solid fa-car"></i>
+          <p>Mecânico</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção de Profissionais -->
+  <section id="profissionais" class="resultados">
+    <div class="container">
+      <h3>Profissionais Disponíveis</h3>
+      <div class="filtros-busca">
+        <div class="filtro-grupo">
+          <label for="filtroServico">Filtrar por serviço:</label>
+          <select id="filtroServico" onchange="aplicarFiltros()">
+            <option value="">Todos os serviços</option>
+            <option value="Eletricista">Eletricista</option>
+            <option value="Encanador">Encanador</option>
+            <option value="Pedreiro">Pedreiro</option>
+            <option value="Pintor">Pintor</option>
+            <option value="Diarista">Diarista</option>
+            <option value="Carpinteiro">Carpinteiro</option>
+            <option value="Jardineiro">Jardineiro</option>
+            <option value="Mecânico">Mecânico</option>
+          </select>
+        </div>
+        <div class="filtro-grupo">
+          <label for="filtroCidade">Filtrar por cidade:</label>
+          <select id="filtroCidade" onchange="aplicarFiltros()">
+            <option value="">Todas as cidades</option>
+            <option value="Recife">Recife</option>
+            <option value="Olinda">Olinda</option>
+            <option value="Jaboatão">Jaboatão</option>
+            <option value="Paulista">Paulista</option>
+            <option value="Camaragibe">Camaragibe</option>
+          </select>
+        </div>
+        <button class="btn-limpar" onclick="limparFiltros()">Limpar Filtros</button>
+      </div>
+      <div id="listaProfissionais" class="lista-profissionais"></div>
+    </div>
+  </section>
+
+  <!-- Seção de Login -->
+  <section id="login" class="form-section">
+    <div class="container">
+      <h2>Entrar na Plataforma</h2>
+      <form class="form-box" onsubmit="handleLogin(event)">
+        <input 
+          type="email" 
+          placeholder="E-mail" 
+          required 
+          aria-label="Email para login"
+        />
+        <input 
+          type="password" 
+          placeholder="Senha" 
+          required 
+          aria-label="Senha para login"
+        />
+        <button type="submit" class="btn-submit">Entrar</button>
+        <p>Não tem conta? <a href="#cadastro">Cadastre-se aqui</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Seção de Cadastro -->
+  <section id="cadastro" class="form-section">
+    <div class="container">
+      <h2>Criar Conta</h2>
+      <form class="form-box" onsubmit="handleCadastro(event)">
+        <input 
+          type="text" 
+          placeholder="Nome completo" 
+          required 
+          aria-label="Nome completo"
+        />
+        <input 
+          type="email" 
+          placeholder="E-mail" 
+          required 
+          aria-label="Email para cadastro"
+        />
+        <input 
+          type="tel" 
+          placeholder="Telefone" 
+          required 
+          aria-label="Telefone"
+        />
+        <input 
+          type="password" 
+          placeholder="Senha" 
+          required 
+          aria-label="Senha para cadastro"
+        />
+        <input 
+          type="password" 
+          placeholder="Confirmar senha" 
+          required 
+          aria-label="Confirmação de senha"
+        />
+        <button type="submit" class="btn-submit">Cadastrar</button>
+        <p>Já tem conta? <a href="#login">Entrar aqui</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Sobre</h4>
+        <p>Plataforma de busca de profissionais qualificados em diversas áreas.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Links Rápidos</h4>
+        <ul>
+          <li><a href="#home">Início</a></li>
+          <li><a href="#profissionais">Profissionais</a></li>
+          <li><a href="#categorias">Categorias</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Redes Sociais</h4>
+        <div class="social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Busca Profissionais - Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
